@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-
-<html>
-    <head>
-            <title>
-                RT operationspark website project.v1
-            </title>
-            <style>
-            body {
+body {
                 background: rgb(95, 102, 128);
                 color: rgb(45, 45, 45);
                 padding: 10px;
@@ -74,46 +66,3 @@
             border-radius: 20px;
             }
            
-        </style>
-        <body>
-            <div id="all-content">
-                <nav>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="studies.html">Studies</a></li>
-                        <li><a href="test.html">test</a></li>
-                        <li>Bananas</li>
-                        <li>Bananas</li>
-                        <li>Bananas</li>
-                        <li>Bananas</li>
-                        <li>Bananas</li>
-                        <li><a href="bananas1.html">Bananas</a></li>
-                    </ul>
-                </nav>
-                <main>
-                    <div class="sidebar">
-                       <img src="https://avatars1.githubusercontent.com/u/23620891?v=3&u=598032ecf47a22a192d3ced48d8f9b8550e33da8&s=400" border="6"></img>
-                    </div>
-                    <div class="content">
-                        <header>Ruthey Truong</header>
-                        <p>his interests includes</p>
-                        <section class=interests">
-                        <header>
-                        <ul>
-                            <li>fishing</li>
-                            <li>karting</li>
-                            <li>and also bananas.</li>
-                        </ul>
-                        </header>
-                        </header>
-                        </section>
-                        
-                              
-                        
-                    </div>
-                </main>
-            </div>
-        </body>
-    </head>
-</html>
