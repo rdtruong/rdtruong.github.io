@@ -1,7 +1,7 @@
 git status
 git add -A
 git status
-git commit -m "added"
+git commit -m "description of what was changed"
 git push
 
 

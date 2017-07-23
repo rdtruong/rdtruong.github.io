@@ -1,0 +1,24 @@
+
+Create a JSBin per JavaScript Subtopic
+Login to JSBin via GitHub.
+Create a new JSBin, and select File > Add description, and give your JSBin a description and <title> to match the name of the subtopic you’re exemplifying, for example, “Variables”.
+Implement your JSBin to illustrate the various concepts of the JavaScript subtopic you’re exemplifying. You should have code examples that clearly show you understand the concept. Use single-line or multiline comments to explain your code. Ensure your code works and is valid by running your JSBin!
+
+Once you’re cool with your code and you’re sure it works, you want to create a GitHub Gist of your JSBin. In JSBin, select File > Export as gist. This will create an anonymous gist - and in the top of JSBin, click on the yellow tab at the top of the page that says, “Gist created! Open in new tab”. This will bring you to the anonymous gist at GitHub.
+
+Next, YOU MUST FORK this anonymous gist so that it is paired with your own GitHub account. Do this by clicking the “Fork” button in top-right corner.
+Once you’ve forked your gist, you can optionally delete unused sub-files of the gist: JSBin will create separate gist files for the html portion of the gist, which in this case, are not needed - you are only interested in the .js sub-file in the gist, it will be called something like jsbin.jihure.js, where jihure is the JSBin id for your bin. You’ve created your gist, pat yourself on the back, smoke’em if you got’em!
+
+...and between the comments that read `YOUR NOTE SECTIONS GO BELOW HERE` and `YOUR NOTE SECTIONS GO ABOVE HERE`, and per study note (gist), paste in the following `<section></section>`, this one exemplifying **Variables**:
+
+  ````HTML
+                  <section>
+                      <hr>
+                      <a href="#variables"><h2>Variables</h2></a>
+                      <code data-gist-id="4ae6dead16cdb2271041" data-gist-file="jsbin.jihure.js" data-gist-hide-footer="true"></code>
+                  </section>
+
+
+Importantly, in the <code></code> tag, replace the data-gist-id attribute with your gist id (the id can be found back on your GitHub gist page, as the last number in the URL of the gist), for example, https://gist.github.com/jfraboni/4ae6dead16cdb2271041 - the gist id here is, 4ae6dead16cdb2271041
+Finally, also in the <code></code>, replace the data-gist-file with the name of the gist sub-file, which you can find on the GitHub gist page, within the header of the of the JavaScript gist sub-file. For example, the sub-file embedded from the gist at https://gist.github.com/jfraboni/4ae6dead16cdb2271041 is jsbin.jihure.js.
+Okay, once you do this, save your changes, then flip back to your studies.html page and refresh, you should see your nice section header for the subtop, plus your gist right below this, exemplifying your smartness!
