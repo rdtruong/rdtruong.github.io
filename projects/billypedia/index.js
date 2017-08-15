@@ -32,31 +32,33 @@ $(document).ready(function() {
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////sidebar-section-recording//////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-
-        $('#sidebar').append($('<section>').attr('id', 'section-recordings'));
-        $('#section-recordings').append($('<header>')
-            .attr('id', 'header-recordings')
-            .attr('class', 'header')
-            .text('Other Recordings'));
-        $('#section-recordings').append($('<ul>')
-            .attr('id', 'list-recordings'));
-            
-            
-        var recordings = data.discography.recordings;
-       
-        let listRecordings = _.map(recordings, function (recordings){
-            return $('<li>').attr('class', 'recording')
-            
-                .append($('<div>')
-                .attr('class', 'title')
-                .text(recordings.title)
-                
+            $('#sidebar')
+                .append($('<section>')
+                .attr('id', 'section-recordings'));
+                    
+            $('#section-recordings')
+                .append($('<header>')
+                    .attr('id', 'header-recordings')
+                    .attr('class', 'header')
+                    .text('Recordings'))
+                .append($('<ul>')
+                    .attr('id', 'list-recordings')
                 );
+                
+            var recordings = data.discography.recordings;  
+         _.map(recordings, function (e, i, a){
+            
+            var divlist=$('<li>').attr('class', 'recording').attr('src', data.discography.recordings[i].art);
+            $('#list-recordings').append($(divlist));
+                divlist.append($('<div>').attr('class', 'title').text("Title: " + e.title));
+                divlist.append($('<div>').attr('class', 'artist').text("Artist: " + e.artist));
+                divlist.append($('<div>').attr('class', 'release').text("Release: " + e.release));
+                divlist.append($('<div>').attr('class', 'year').text("Year: " + e.year));
             });
-        $('#list-recordings').append(listRecordings);
-        
+            $('#list-recordings').append(recordings)
+    
 ////////////////////////////////////////////////////////////////////////////////       
-///////////////////////////////////////////////////////////////////////////////
+/////////////////section recording image/////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
         $('#header-recordings').append($('<div>')
             .attr('id', 'image-container-recordings')
@@ -66,15 +68,40 @@ $(document).ready(function() {
             .attr('class', 'image')
             .attr('id', 'image-recordings'));
         
-        
-        // uncomment this to inspect all available data; delete when done //
-        // console.log(data);
+        ///////////////////////////////////////////////////////////////////////////
+///////////////recording picture change//////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+          
+            
+            $('.recording').on('click', function(event) {
+                _.each(recordings, function (e, i, a){
+            var imgSrc = (data.discography.recordings[i].art).toLowerCase().replace(' ', '-');
+            
+                let elem = $(event.currentTarget);
+                $('#image-recordings').fadeOut('fast', function() {
+                    $('.recording').attr('src', imgSrc);
+                }).fadeIn('fast');
+            });
+            })
+//       $('.recording').on('click', function(event) {
+//             console.log(event)
+//         //     //use each function
+//         //     var recordingpic=data.recordings[index].art
+//         //     $('#image-container-recordings')
+//         //     data.discography.recordings.art
+            
+//         //     1.access the image ($('image-container-recordings')).attr($(img src))
+//         //     2. change the img src on click to data.discography.recordings.art
+  
+// console.log("must change image");
+// alert('image change');
+// });
 ///////////////////////////////////////////////////////////////////////////  
 ///////////////////billy picture change///////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
 
- $('#image-billy').on('click', function(event) {
+        $('#image-billy').on('click', function(event) {
                 
                 let elem = $(event.currentTarget);
                 let i = elem.attr('i');
@@ -94,48 +121,45 @@ $(document).ready(function() {
                     }).fadeIn('fast');
                 }
             });
-///////////////////////////////////////////////////////////////////////////
-///////////////recording picture change//////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-       
-        
-    //     $('.recording').on('click', function (event){
-    //         // console.log(event)
-    //         // //use each function
-    //         // var recordingpic=data.recordings[index].art
-    //         // $('#image-container-recordings')
-    //         //data.discography.recordings.art
+
+/////////////////////////////////////////////////////////////////////////////////
+//////////////////////// Billy's rider///////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
             
-    //         //1.access the image ($('image-container-recordings')).attr($(img src))
-    //         //2. change the img src on click to data.discography.recordings.art
+            var createTable = function(equipment) {
+                var createRow = function(instrument) {
+                    var $row = $("<tr>");
+                    var $type = $("<td>").text(instrument.type);
+                    var $desc = $("<td>").text(instrument.desc)
+                        .attr('class', 'instrument-desc');
+                    $row.append($type);
+                    $row.append($desc);
+                    return $row;
+                };
+                var $table = $("<table>");
+                var $rows = equipment.map(createRow);
+                $table.append($rows);
+                return $table;
+            };
             
-    //     var billyimage = data.images.billy;
-    //     var billypic = $('#image-billy').attr("src");
-    //     var billyindex = _.indexOf(billyimage, billypic);
-        
+            // Appends Table to the Sidebar
+            $('#sidebar')
+                .append($('<section>').attr('id', 'section-rider'));
+            createTable(data.rider).appendTo('#section-rider').attr('id', 'table-rider');
             
-    //   console.log(event);
-    //         if(billyindex === billyimage.length-1)
-    //   $('#image-billy').attr('src', billyimage[billyindex +1]);
-       
-  
-// console.log("must change image");
-// alert('image change');
-// });
+            // Adds a Header for Table
+            $('#section-rider')
+                .prepend($('<header>')
+                .text("Billy's Rider")
+                .attr('class', 'header'));
+            
+            // Adds a Header for Instrument & Description
+            $('#table-rider').prepend($('<th>').text('Description'));
+            $('#table-rider').prepend($('<th>').text('Instrument'));
 
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         
         
         // YOUR CODE ABOVE HERE //
