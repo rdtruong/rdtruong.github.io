@@ -2,106 +2,97 @@
 $(document).ready(function() {
     $.getJSON('data.json', function (data) {
         // YOUR CODE BELOW HERE //
-////////////////////////////////////////////////////////////////////////////////  
-///////////////////////style////////////////////////////////////    
-////////////////////////////////////////////////////////////////////////////////    
-        $('#section-bio')
-        .css('border-radius', '4px');
         
-        $('#section-quotes')
-        .css('border-radius', '4px');
-/////////////////////////////////////////////////////////////////////////////////       
-////////////////////top rated list///////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-        let topRated = data.discography.topRated;
-        _.forEach(topRated, function(recording) {
-            console.log(recording);
-        });
+            $('#section-bio')
+                .css('border-radius', '4px');
         
-        var topRatedList=_.map(topRated, function(album, i, a){
-           var $list= $('<li>');
-           $list.text(album.title);
+            $('#section-quotes')
+                .css('border-radius', '4px');
+                
+            $('#list-top-rated').css('list-style', 'none');
+            $('#section-bio p:last-child').remove();
+            
+            
+            var topRated = data.discography.topRated;
+            var listTopRatedItems = _.map(topRated, function(recording) {
+                return $('<ul>')
+                    .append($('<div>')
+                        .text(recording.title)
+                        .addClass('title-top-rated')
+                        .attr('art', recording.art));
+            });
+            
            
-           return $list;
-           //var $ltr = $('#list-top-rated')
-           //$list.appendTo($ltr);
-        });
-        $('#list-top-rated').append(topRatedList);
-
-
-///////////////////////////////////////////////////////////////////////////////
-////////////////////////////sidebar-section-recording//////////////////////////
-///////////////////////////////////////////////////////////////////////////////
+            $('#list-top-rated')
+                .append(listTopRatedItems)
+                .css('padding', 5);
+                
+            
+            $('#header-top-rated')
+                .append($('<div>')
+                    .attr('id', 'image-container-top-rated')
+                    .attr('class', 'image-container'));
+                    
+            $('#image-container-top-rated')
+                .append($('<img>')
+                    .attr('src', 'images/album/voice-in-the-night.jpg')
+                    .attr('class', 'image')
+                    .attr('id', 'image-top-rated'));
+                    
+            
+            $('.title-top-rated').on('click', function(event) {
+                let elem = $(event.currentTarget);
+                $('#image-top-rated').fadeOut('fast', function() {
+                    $('#image-top-rated')
+                        .attr('src', $(elem).attr('art'));
+                }).fadeIn('fast');
+            });
+            
+            
             $('#sidebar')
                 .append($('<section>')
-                .attr('id', 'section-recordings'));
+                    .attr('id', 'section-recordings'));
                     
             $('#section-recordings')
                 .append($('<header>')
                     .attr('id', 'header-recordings')
                     .attr('class', 'header')
-                    .text('Recordings'))
+                    .text('Recordings')
+                    .css('padding', 5)
+                    .css('font-size', '25px'))
                 .append($('<ul>')
-                    .attr('id', 'list-recordings')
-                );
-                
-            var recordings = data.discography.recordings;  
-         _.map(recordings, function (e, i, a){
+                    .attr('id', 'list-recordings'));
+                    
             
-            var divlist=$('<li>').attr('class', 'recording').attr('src', data.discography.recordings[i].art);
-            $('#list-recordings').append($(divlist));
-                divlist.append($('<div>').attr('class', 'title').text("Title: " + e.title));
-                divlist.append($('<div>').attr('class', 'artist').text("Artist: " + e.artist));
-                divlist.append($('<div>').attr('class', 'release').text("Release: " + e.release));
-                divlist.append($('<div>').attr('class', 'year').text("Year: " + e.year));
+            var recordings = data.discography.recordings;
+            let listRecordings = _.map(recordings, function(recording) {
+                return $('<ul>')
+                    .append($('<div>')
+                        .text(recording.title)
+                        .addClass('title-recordings')
+                        .attr('art', recording.art));
             });
-            $('#list-recordings').append(recordings)
-    
-////////////////////////////////////////////////////////////////////////////////       
-/////////////////section recording image/////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-        $('#header-recordings').append($('<div>')
-            .attr('id', 'image-container-recordings')
-            .attr('class', 'image-container'));
-        $('#image-container-recordings').append($('<img>')
-            .attr('src', 'images/album/eastern-rebellion.jpg')
-            .attr('class', 'image')
-            .attr('id', 'image-recordings'));
-        
-        ///////////////////////////////////////////////////////////////////////////
-///////////////recording picture change//////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
+            $('#list-recordings').append(listRecordings).css('padding', 5);
+            
           
+            $('#header-recordings').append($('<div>').attr('id', 'image-container-recordings')
+                .attr('class', 'image-container'));
+            $('#image-container-recordings').append($('<img>')
+                .attr('src', 'images/album/eastern-rebellion.jpg')
+                .attr('class', 'image').attr('id', 'image-recordings'));
+                
             
-            $('.recording').on('click', function(event) {
-                _.each(recordings, function (e, i, a){
-            var imgSrc = (data.discography.recordings[i].art).toLowerCase().replace(' ', '-');
-            
+            $('.title-recordings').on('click', function(event) {
                 let elem = $(event.currentTarget);
                 $('#image-recordings').fadeOut('fast', function() {
-                    $('.recording').attr('src', imgSrc);
+                    $('#image-recordings').attr('src', elem.attr('art'));
                 }).fadeIn('fast');
             });
-            })
-//       $('.recording').on('click', function(event) {
-//             console.log(event)
-//         //     //use each function
-//         //     var recordingpic=data.recordings[index].art
-//         //     $('#image-container-recordings')
-//         //     data.discography.recordings.art
             
-//         //     1.access the image ($('image-container-recordings')).attr($(img src))
-//         //     2. change the img src on click to data.discography.recordings.art
-  
-// console.log("must change image");
-// alert('image change');
-// });
-///////////////////////////////////////////////////////////////////////////  
-///////////////////billy picture change///////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 
-
-        $('#image-billy').on('click', function(event) {
+                
+            
+            $('#image-billy').on('click', function(event) {
                 
                 let elem = $(event.currentTarget);
                 let i = elem.attr('i');
@@ -121,11 +112,7 @@ $(document).ready(function() {
                     }).fadeIn('fast');
                 }
             });
-
-/////////////////////////////////////////////////////////////////////////////////
-//////////////////////// Billy's rider///////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-
+            
             
             var createTable = function(equipment) {
                 var createRow = function(instrument) {
@@ -143,25 +130,20 @@ $(document).ready(function() {
                 return $table;
             };
             
-            // Appends Table to the Sidebar
+            
             $('#sidebar')
                 .append($('<section>').attr('id', 'section-rider'));
             createTable(data.rider).appendTo('#section-rider').attr('id', 'table-rider');
             
-            // Adds a Header for Table
+            
             $('#section-rider')
                 .prepend($('<header>')
                 .text("Billy's Rider")
                 .attr('class', 'header'));
             
-            // Adds a Header for Instrument & Description
+            
             $('#table-rider').prepend($('<th>').text('Description'));
             $('#table-rider').prepend($('<th>').text('Instrument'));
-
-
-
-        
-        
         // YOUR CODE ABOVE HERE //
     })
     .fail(function() { console.log('getJSON on discography failed!'); });
